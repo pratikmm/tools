@@ -1,10 +1,10 @@
 #!/bin/bash -e
 
-mkdir -p /srv/shiny-server
-mkdir -p /srv/R/library
-[ -f  /srv/.Rprofile ] || echo '.libPaths("/srv/R/library/")' > /srv/.Rprofile
-[ -f  /srv/.Renvron ] || echo 'R_LIBS=/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib/R/library:/srv/R/library
-' > /srv/.Renvron
+mkdir -p /home/plumber/plumber
+mkdir -p /home/plumber/R/library
+[ -f  /home/plumber/.Rprofile ] || echo '.libPaths("/home/plumber/R/library/")' > /home/plumber/.Rprofile
+[ -f  /home/plumber/.Renvron ] || echo 'R_LIBS=/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib/R/library:/home/plumber/R/library
+' > /home/plumber/.Renvron
 
-/usr/bin/shiny-server.sh
+Rscript /home/plumber/plumber.R
 
