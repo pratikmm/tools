@@ -12,7 +12,6 @@ RUN \
   R CMD javareconf && \
   Rscript /usr/local/lib/R/packages.R
 
-COPY encrypted-sign-in.htm /usr/lib/rstudio-server/www/templates/encrypted-sign-in.htm
 COPY entrypoint.sh /entrypoint.sh
 
 RUN   usermod -u 1100 rstudio && \
@@ -20,4 +19,12 @@ RUN   usermod -u 1100 rstudio && \
       chown -R rstudio:rstudio /home/rstudio && \
       chmod +x /entrypoint.sh
 
+ENV PASSWORD matrix
+ENV DISABLE_AUTH true
+ENV ROOT TRUE 
+WORKDIR /home/rstudio
+
+
 ENTRYPOINT ["sh", "-c", "/entrypoint.sh >>/var/log/stdout.log 2>>/var/log/stderr.log"]
+#CMD ["/init"]
+
