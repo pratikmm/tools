@@ -5,8 +5,8 @@ USER root
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install all basic OS dependencies
-RUN apt-get update
-RUN apt-get install -yq --no-install-recommends \
+RUN apt-get update \
+  && apt-get install -yq --no-install-recommends \
     apt \
     apt-utils \
     bash-completion \
@@ -63,18 +63,17 @@ ENV LANG=en_US.utf8 \
 
 # Install additional libraries
 RUN apt-get install -yq --no-install-recommends \
-    libsm6 \
-    libxext-dev \
-    libxrender1 \
     libblas-dev \
     libcurl4 \
     libcurl4-gnutls-dev \
     libgdal-dev \
+    libglu1-mesa-dev \
     libgmp3-dev \
     libicu60 \
     libjpeg-turbo8 \
     libmagick++-dev \
     libmariadb-client-lgpl-dev \
+    libmpfr-dev \
     libmpfr-dev \
     libncurses5-dev \
     libnettle6 \
@@ -85,11 +84,14 @@ RUN apt-get install -yq --no-install-recommends \
     libpng16-16 \
     libpq-dev \
     libsasl2-dev \
+    libsm6 \
     libssl-dev \
     libtiff5 \
     libtool \
     libudunits2-dev \
+    libxext-dev \
     libxml2-dev \
+    libxrender1 \
     zlib1g-dev
 
 # Set timezone noninteractively
@@ -110,10 +112,10 @@ RUN apt-get install -y --no-install-recommends \
 # R Repo, see https://cran.r-project.org/bin/linux/ubuntu/README.html
 RUN echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' >> /etc/apt/sources.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-RUN apt-get update
 
 # R-specific packages
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
     r-base-core \
     r-base-dev \
     r-cran-boot \
@@ -128,6 +130,8 @@ RUN apt-get install -y --no-install-recommends \
     r-cran-mgcv \
     r-cran-nlme \
     r-cran-nnet \
+    r-cran-rgl \
+    r-cran-rjava
     r-cran-rpart \
     r-cran-spatial \
     r-cran-survival
