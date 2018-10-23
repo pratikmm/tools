@@ -113,15 +113,14 @@ RUN apt-get install -y --no-install-recommends \
 
 #install git, vim
 
-RUN apt-get install git \
-	vim
+RUN apt-get install -y git \
+	                     vim \
+                       curl
 
 #install kaggle cli
 RUN pip install kaggle
 
 #mongo cli
-#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-#RUN echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list
 RUN apt-get install -y mongodb-clients
 
 #mysql shell
@@ -132,9 +131,18 @@ RUN apt-get install -y postgresql-client
 
 
 #install Rclone
-#RUN git clone https://github.com/ncw/rclone.git
-#RUN go build rclone/
-#./rclone version
+#RUN wget https://rclone.org/install.sh
+#RUN chmod +x install.sh
+#RUN ./install.sh
+RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+RUN unzip rclone-current-linux-amd64.zip
+#RUN cd rclone-*-linux-amd64
+RUN ls rclone-*-linux-amd64
+RUN cp rclone-*-linux-amd64/rclone /usr/bin/
+RUN chown root:root /usr/bin/rclone
+RUN chmod 755 /usr/bin/rclone
+
+
 
 # R Repo, see https://cran.r-project.org/bin/linux/ubuntu/README.html
 RUN echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' >> /etc/apt/sources.list
