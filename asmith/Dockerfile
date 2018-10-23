@@ -4,6 +4,8 @@ USER root
 
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get update
+
 # Install all basic OS dependencies
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends \
@@ -109,14 +111,48 @@ RUN apt-get install -y --no-install-recommends \
     python3-dev \
   && apt-get clean
 
+#install git, vim
+
+RUN apt-get install git \
+	vim
+
+#install kaggle cli
+RUN pip install kaggle
+
+#mongo cli
+#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+#RUN echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+RUN apt-get install -y mongodb-clients
+
+#mysql shell
+RUN apt-get install -y mysql-client
+
+#postgre shell
+RUN apt-get install -y postgresql-client
+
+
+#install Rclone
+#RUN git clone https://github.com/ncw/rclone.git
+#RUN go build rclone/
+#./rclone version
+
 # R Repo, see https://cran.r-project.org/bin/linux/ubuntu/README.html
 RUN echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' >> /etc/apt/sources.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 
 # R-specific packages
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-    r-base-core \
+#RUN apt-get update
+
+RUN apt-get install -y --no-install-recommends r-base-core
+
+RUN apt-get install -y --no-install-recommends r-base
+
+RUN apt-get install -y --no-install-recommends r-cran-rgl
+
+RUN apt-get install -y --no-install-recommends r-cran-rjava
+
+RUN apt-get install -y --no-install-recommends \
+    r-cran-rjava \
     r-base-dev \
     r-cran-boot \
     r-cran-class \
@@ -130,8 +166,8 @@ RUN apt-get update \
     r-cran-mgcv \
     r-cran-nlme \
     r-cran-nnet \
-    r-cran-rgl \
-    r-cran-rjava
+#    r-cran-rgl \
+#    r-cran-rjava \
     r-cran-rpart \
     r-cran-spatial \
     r-cran-survival
@@ -141,7 +177,7 @@ RUN R CMD javareconf \
   && rm r_packages.R
 
 # Install experimental dependencies
-# RUN apt-get install -y --no-install-recommends \
+ RUN apt-get install -y --no-install-recommends \
 
 # Add Tini
 ENV TINI_VERSION v0.18.0
