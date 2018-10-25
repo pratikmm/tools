@@ -74,14 +74,14 @@ RUN apt-get update \
 COPY userconf.sh /etc/cont-init.d/userconf
 
 ## running with "-e ADD=shiny" adds shiny server
-COPY add_shiny.sh /etc/cont-init.d/add
+#COPY add_shiny.sh /etc/cont-init.d/add
 
 COPY pam-helper.sh /usr/lib/rstudio-server/bin/pam-helper
 
 EXPOSE 8787
 
 ## automatically link a shared volume for kitematic users
-VOLUME /home/rstudio/kitematic
+#VOLUME /home/rstudio/kitematic
 
 COPY user-settings /home/rstudio/.rstudio/monitored/user-settings/
 # No chown will cause "RStudio Initalization Error"
@@ -101,6 +101,12 @@ RUN \
   R CMD javareconf
 
 COPY entrypoint.sh /entrypoint.sh
+
+#add encrypted auth html file
+COPY encrypted-sign-in.htm /usr/lib/rstudio-server/www/templates/encrypted-sign-in.htm
+
+#Reset password for rstudio user
+RUN echo "rstudio:rstudio" | chpasswd
 
 RUN   usermod -u 1100 rstudio && \
       groupmod -g 1100 rstudio && \
