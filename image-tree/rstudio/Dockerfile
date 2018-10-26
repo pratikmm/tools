@@ -49,7 +49,7 @@ RUN apt-get update \
   && echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron \
   ## Need to configure non-root user for RStudio
   && useradd rstudio \
-  && echo "rstudio:rstudio" | chpasswd \
+  && echo "rstudio:matrix" | chpasswd \
 	&& mkdir /home/rstudio \
 	&& chown rstudio:rstudio /home/rstudio \
 	&& addgroup rstudio staff \
@@ -106,7 +106,7 @@ COPY entrypoint.sh /entrypoint.sh
 COPY encrypted-sign-in.htm /usr/lib/rstudio-server/www/templates/encrypted-sign-in.htm
 
 #Reset password for rstudio user
-RUN echo "rstudio:rstudio" | chpasswd
+#RUN echo "rstudio:rstudio" | chpasswd
 
 RUN   usermod -u 1100 rstudio && \
       groupmod -g 1100 rstudio && \
