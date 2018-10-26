@@ -37,12 +37,12 @@ RUN mkdir /app/jupyter && chown -R matrix:matrix /app/
 RUN touch /var/log/stderr.log && touch /var/log/stdout.log && chown matrix:matrix /var/log/stderr.log && chown matrix:matrix /var/log/stdout.log
 
 # R
-#COPY packages.R .
-#RUN R CMD javareconf && \
-#      apt-get update && \
-#      apt-get install -y && apt-get clean && \
-#    Rscript packages.R && \
-#    rm packages.R
+COPY packages.R .
+RUN R CMD javareconf && \
+      apt-get update && \
+      apt-get install -y && apt-get clean && \
+    Rscript packages.R && \
+    rm packages.R
 
 # Julia
 #ENV JULIA_PKGDIR /usr/local/share/julia/site
