@@ -13,7 +13,7 @@ RUN mkdir -p /usr/local/lib/R/etc
 ## Symlink pandoc, pandoc-citeproc so they are available system-wide
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-    file \
+#    file \
     libapparmor1 \
     libcurl4-openssl-dev \
     libedit2 \
@@ -94,11 +94,12 @@ RUN chown -R rstudio:rstudio /home/rstudio/.rstudio
 RUN \
   apt-get update && apt-get install -y && \
   DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-    default-jre default-jdk r-base-core icu-devtools zlib1g-dev libncurses5-dev libsasl2-dev libnlopt-dev libgmp3-dev libglu1-mesa-dev \
-    libssl-dev libxml2-dev openjdk-8-jdk  r-cran-rjava libmariadb-client-lgpl-dev r-cran-rgl libmpfr-dev \
-    libpq-dev texlive-xetex libgdal-dev libudunits2-dev libmagick++-dev \
-    && apt-get clean && \
-  R CMD javareconf
+    default-jre default-jdk icu-devtools && apt-get clean
+#    r-base-core icu-devtools zlib1g-dev libncurses5-dev libsasl2-dev libnlopt-dev libgmp3-dev libglu1-mesa-dev \
+#    libssl-dev libxml2-dev openjdk-8-jdk  r-cran-rjava libmariadb-client-lgpl-dev r-cran-rgl libmpfr-dev \
+#    libpq-dev texlive-xetex libgdal-dev libudunits2-dev libmagick++-dev \
+#    && apt-get clean
+#  R CMD javareconf
 
 COPY entrypoint.sh /entrypoint.sh
 

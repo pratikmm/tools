@@ -4,16 +4,23 @@ FROM dockerpratik/rbase:v1
 RUN  echo 'deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' > /etc/apt/sources.list.d/rstudio.list
 RUN  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
+
+
 RUN apt-get update && apt-get install -y \
-      python3-pip sudo libnlopt-dev \
-      r-base-dev  icu-devtools zlib1g-dev libncurses5-dev libsasl2-dev \
-      libssl-dev libxml2-dev openjdk-8-jdk  r-cran-rjava libmariadb-client-lgpl-dev libpq-dev texlive-xetex \
-      default-jre default-jdk r-base-core icu-devtools zlib1g-dev libncurses5-dev libsasl2-dev \
-      libnlopt-dev libgmp3-dev libglu1-mesa-dev libssl-dev libxml2-dev openjdk-8-jdk \
-      libmariadb-client-lgpl-dev r-cran-rgl libmpfr-dev libpq-dev texlive-xetex libgdal-dev libudunits2-dev \
-      libmagick++-dev mesa-common-dev libcurl4-gnutls-dev \
-      && \
-    apt-get clean
+      default-jre default-jdk \
+      && apt-get clean
+
+
+#RUN apt-get update && apt-get install -y \
+#      python3-pip sudo libnlopt-dev \
+#      r-base-dev  icu-devtools zlib1g-dev libncurses5-dev libsasl2-dev \
+#      libssl-dev libxml2-dev openjdk-8-jdk  r-cran-rjava libmariadb-client-lgpl-dev libpq-dev texlive-xetex \
+#      default-jre default-jdk r-base-core icu-devtools zlib1g-dev libncurses5-dev libsasl2-dev \
+#      libnlopt-dev libgmp3-dev libglu1-mesa-dev libssl-dev libxml2-dev openjdk-8-jdk \
+#      libmariadb-client-lgpl-dev r-cran-rgl libmpfr-dev libpq-dev texlive-xetex libgdal-dev libudunits2-dev \
+#      libmagick++-dev mesa-common-dev libcurl4-gnutls-dev \
+#      && \
+#    apt-get clean
 
 #python 
 RUN pip3 install jupyterlab numpy matplotlib pandas
