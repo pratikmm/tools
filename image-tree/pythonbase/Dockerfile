@@ -25,27 +25,33 @@ ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
 
 
-RUN conda install -y pandas
-RUN conda install -y numexpr 
-RUN conda install -y matplotlib
-RUN conda install -y scipy
-RUN conda install -y seaborn
-RUN conda install -y scikit-learn
-RUN conda install -y scikit-image
-RUN conda install -y sympy
-RUN conda install -y cython
-RUN conda install -y patsy
+RUN conda install pandas
+RUN conda install numexpr 
+RUN conda install matplotlib
+RUN conda install scipy
+RUN conda install seaborn
+RUN conda install scikit-learn
+RUN conda install scikit-image
+RUN conda install sympy
+RUN conda install cython
+RUN conda install patsy
 RUN conda install -c conda-forge statsmodels  
-RUN conda install -y cloudpickle
-RUN conda install -y dill
-RUN conda install -y numba
-RUN conda install -y bokeh
-RUN conda install -y sqlalchemy
-RUN conda install -y hdf5
-RUN conda install -y vincent
-RUN conda install -y beautifulsoup4
-RUN conda install -y protobuf
-RUN conda install -y xlrd
-RUN conda install -y ipywidgets
-RUN conda install -y tensorflow  
+RUN conda install cloudpickle
+RUN conda install dill
+RUN conda install numba
+RUN conda install bokeh
+RUN conda install sqlalchemy
+RUN conda install hdf5
+RUN conda install vincent
+RUN conda install beautifulsoup4
+RUN conda install protobuf
+RUN conda install xlrd
+RUN conda install ipywidgets
+RUN conda install tensorflow  
 RUN pip3 install facets   
+
+RUN echo "==========================================="
+RUN python --version
+RUN which python
+#RUN find / -name python
+#RUN /usr/bin/python --version
