@@ -50,8 +50,6 @@ RUN conda install ipywidgets
 RUN conda install tensorflow  
 RUN pip3 install facets   
 
-RUN echo "==========================================="
-RUN python --version
-RUN which python
-#RUN find / -name python
-#RUN /usr/bin/python --version
+RUN apt-get remove -y python
+RUN rm /usr/bin/python
+RUN ln -s /opt/conda/bin/python /usr/bin/python
